@@ -26,14 +26,14 @@
     </style>
     <!-- basic + hra + da - tax = salary -->
     <script type="text/babel">
-        class Calculator extends React.Component{
+        class CalculatorApp extends React.Component{
             //State
             state = {
                 basic : 0,
                 hra : 0,
                 da : 0,
-                tax : 0,
-                salary : 0
+                tax : '',
+                salary : undefined
             };
 
         //UI Behavior
@@ -41,33 +41,41 @@
                 const basic = this.state.basic,
                     hra = this.state.hra,
                     da = this.state.da,
-                    tax = this.state.tax,
-                    salary = this.state.salary ;
+                    tax = this.state.tax;
+
                 const gross = basic + hra + da,
                     net = gross * ((100-tax)/100);
                 this.setState({ salary : net });
+                
             }
 
         //Presentation 
 
         render(){
+            
             return(
                     <section>
                             <div className="field">
                                 <label htmlFor="">Basic :</label>
-                                <input type="number" />
+                                <input type="number" 
+                                onChange={ e => this.setState({'basic': parseInt(e.target.value)}) }/>
                             </div>
                             <div className="field">
                                 <label htmlFor="">HRA :</label>
-                                <input type="number" />
+                                <input type="number" 
+                                onChange={ e => this.setState({'hra': parseInt(e.target.value)}) }/>
                             </div>
                             <div className="field">
                                 <label htmlFor="">DA :</label>
-                                <input type="number" />
+                                <input type="number" 
+                                onChange={ e => this.setState({'da': parseInt(e.target.value)}) }/>
                             </div>
                             <div className="field">
                                 <label htmlFor="">Tax :</label>
-                                <input type="range"  min="0" max="30" value="0"/>
+                                <input type="range"  
+                                onChange={ e => this.setState({'tax': parseInt(e.target.value)}) }
+                                min="0" max="30" 
+                                defaultValue="0"/>
                             </div>
                             <div className="field">
                                 <input type="button" value="Calculate" id="btnCalculate" onClick={this.onBtnCalculateClick} />
@@ -76,11 +84,11 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td id="tdBasic">[basic]</td>
-                                            <td id="tdHra">[hra]</td>
-                                            <td id="tdDa">[da]</td>
-                                            <td id="tdTax">[tax]</td>
-                                            <td id="tdSalary">[salary]</td>
+                                            <td id="tdBasic">{ this.state.basic }</td>
+                                            <td id="tdHra">{ this.state.hra }</td>
+                                            <td id="tdDa">{ this.state.da }</td>
+                                            <td id="tdTax">{ this.state.tax }</td>
+                                            <td id="tdSalary">{ this.state.salary }</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -92,7 +100,7 @@
     }
     ReactDOM.render(
         <div>
-            <Calculator />
+            <CalculatorApp />
         </div>,
         document.getElementById('root')
     )
