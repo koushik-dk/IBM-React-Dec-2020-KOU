@@ -5,5 +5,55 @@ Rich Internet Applications (RIA)
 
 View Synchronization strategies
 
-1. Increment
-    
+
+ES6 (ECMAScript 6, ES2015, ESNext)
+==================================
+1. let
+2. const
+3. Array destructuring
+4. Rest operator (Array)
+5. Spread operator (Array)   
+6. Object destructuring
+7. Rest operator (Object)
+8. Spread operator (Object) 
+9. Default arguments 
+10. Arrow functions 
+11. template strings
+12. classes
+
+http://es6-features.org
+
+Array methods : filter, map, reduce, forEach
+
+
+React
+    Component = encapsulation of State + Presentation + UI Behavior 
+    Application = composition of components
+
+
+HTML & JSX
+
+    In HTML
+        - open tags without close tags are allowed
+        - 'for' attribute is allowed
+        - 'class' attribute is allowed
+
+    In JSX
+        - every open tag must have a close tag
+        - use 'htmlFor' in place of 'for' attribute
+        - use 'className' in place of 'class' attribute
+
+
+Folder : Assignment-1
+    (KDK create the 01-RIA index.html using react component , refer greeter.html for react)
+
+State
+    UI State
+        Any data that supports the presenation logic of the application
+        Highly UNLIKELY that this data might be needed in other parts of the application
+        Feel free to keep this data in the component state
+
+    Application State
+        Any data that supports the core application logic
+        Highly LIKELY that this data might be needed in other parts of the application
+        DO NOT keep this data in the component state. Where?
