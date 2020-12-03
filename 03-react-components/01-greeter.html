@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Greeter</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <style>
+        .highlight{
+            color : blue;
+        }
+    </style>
+    <script type="text/babel">
+        class Greeter extends React.Component{
+            //state
+            state = {
+                userName : '',
+                message : 'Dummy greet message'
+            };
+
+            //UI Behavior
+            onBtnGreetClick = () => {
+                const userName = this.state.userName,
+                    message = `Hi ${userName}, ${this.props.template}`;
+                this.setState({ message : message });
+            }
+
+            onUserNameTxtChange = (evt) => {
+                this.setState({ userName : evt.target.value });
+            }
+
+            //Presentation
+            render(){
+                console.log(this.props);
+                return(
+                     <div>
+                        <h3>Greeter</h3>
+                        <hr/>
+                        <label htmlFor="">User Name :</label>
+                        <input type="text" onChange={this.onUserNameTxtChange} />
+                        <input type="button" value="Greet" onClick={this.onBtnGreetClick} />
+                        <div className="highlight">{this.state.message}</div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            /* React.createElement(Greeter, { template : 'Have a good day!'}),  */
+            <div>
+                <Greeter template="Have a good day!" x="100" y={200} />
+                <Greeter template="Have a nice day!" />
+            </div>,
+            document.getElementById('root')
+        )
+    </script>
+</head>
+<body>
+    <div id="root">
+       
+    </div>
+</body>
+</html>
