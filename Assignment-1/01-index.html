@@ -28,10 +28,25 @@
     <script type="text/babel">
         class Calculator extends React.Component{
             //State
-
+            state = {
+                basic : 0,
+                hra : 0,
+                da : 0,
+                tax : 0,
+                salary : 0
+            };
 
         //UI Behavior
-
+        onBtnCalculateClick = () => {
+                const basic = this.state.basic,
+                    hra = this.state.hra,
+                    da = this.state.da,
+                    tax = this.state.tax,
+                    salary = this.state.salary ;
+                const gross = basic + hra + da,
+                    net = gross * ((100-tax)/100);
+                this.setState({ salary : net });
+            }
 
         //Presentation 
 
@@ -55,7 +70,7 @@
                                 <input type="range"  min="0" max="30" value="0"/>
                             </div>
                             <div className="field">
-                                <input type="button" value="Calculate" id="btnCalculate"/>
+                                <input type="button" value="Calculate" id="btnCalculate" onClick={this.onBtnCalculateClick} />
                             </div>
                             <div className="field">
                                 <table>
