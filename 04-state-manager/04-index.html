@@ -11,6 +11,9 @@
     <script src="babel.min.js"></script>
     <!-- 
         01. initial implementation
+        02. remove the 'store' direct dependency in the component
+        03. introducing 'actionCreators'
+        04. introducing 'actionDispatchers'
      -->
     <script type="text/babel">
         function spinnerReducer(currentState = 0 , action){
@@ -24,15 +27,15 @@
         const store = StateManager.createStore(spinnerReducer);
 
         class Spinner extends React.Component {
+
             onDecrementClick = () => {
-                this.props.store.dispatch({ type : 'DECREMENT'})
+                this.props.actionDispatchers.decrement();
             };
             onIncrementClick = () => {
-                this.props.store.dispatch({ type : 'INCREMENT'});
-            }
+                this.props.actionDispatchers.increment();                
+            };
             render(){
-                const { store } = this.props,
-                    value = store.getState();
+                const { value } = this.props;
                 return(
                     <div>
                         <h3>Spinner</h3>
@@ -45,8 +48,38 @@
             }
         }
 
+        const spinnerActionCreators = {
+            decrement(){
+                const action = { type : 'DECREMENT'};
+                return action;
+            },
+            increment(){
+                const action = { type : 'INCREMENT' };
+                return action;
+            }
+        }
+
+        function bindActionCreators(actionCreators, dispatch){
+            const actionDispatchers = {
+                decrement(){
+                    const action = actionCreators.decrement();
+                    dispatch(action);
+                }, 
+                increment(){
+                    const action = actionCreators.increment();
+                    dispatch(action);
+                }
+            };
+            return actionDispatchers;
+        }
+
+        const actionDispatchers = bindActionCreators(spinnerActionCreators, store.dispatch);
+
         function renderSpinner(){
-            ReactDOM.render(<Spinner store={store}/>, document.getElementById('root'))
+            const value = store.getState();
+            ReactDOM.render(
+                <Spinner value={value} actionDispatchers={actionDispatchers}/>
+            , document.getElementById('root'))
         }
         renderSpinner();
         store.subscribe(renderSpinner);

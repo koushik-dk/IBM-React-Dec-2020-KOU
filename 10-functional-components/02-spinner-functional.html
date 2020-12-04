@@ -23,27 +23,38 @@
 
         const store = StateManager.createStore(spinnerReducer);
 
-        class Spinner extends React.Component {
-            onDecrementClick = () => {
+        const Spinner = ({ store }) =>{
+
+            const [ value, setValue ] = React.useState('');
+            const onDecrementClick  = () => {
+                store.dispatch({ type : 'DECREMENT'});
+            }
+            const onIncrementClick  = () => {
+                store.dispatch({ type : 'INCREMENT'});
+            }
+            setValue(value);
+
+         /*   onDecrementClick = () => {
                 this.props.store.dispatch({ type : 'DECREMENT'})
             };
             onIncrementClick = () => {
                 this.props.store.dispatch({ type : 'INCREMENT'});
             }
-            render(){
-                const { store } = this.props,
-                    value = store.getState();
+        */
+           // render(){
+               // const { store } = this.props,
+               //     value = store.getState();
                 return(
                     <div>
                         <h3>Spinner</h3>
                         <hr/>
-                        <input type="button" value="Decrement" onClick={this.onDecrementClick}/>
+                        <input type="button" value="Decrement" onClick={onDecrementClick}/>
                         <span> [ {value} ] </span>
-                        <input type="button" value="Increment" onClick={this.onIncrementClick}/>
+                        <input type="button" value="Increment" onClick={onIncrementClick}/>
                     </div>
                 )
-            }
-        }
+            //}
+        };
 
         function renderSpinner(){
             ReactDOM.render(<Spinner store={store}/>, document.getElementById('root'))
