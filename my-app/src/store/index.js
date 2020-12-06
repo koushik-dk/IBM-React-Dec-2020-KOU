@@ -24,20 +24,32 @@ function loggerMiddleware(store){
     }
         
 }
+//const store = createStore(rootReducer, applyMiddleware(loggerMiddleware, stateMiddleware));
+//const store = createStore(rootReducer, applyMiddleware(stateMiddleware));
 
-function stateMiddleware(store){
+
+function asyncMiddleware({dispatch, getState}){
     return function(next){
         return function(action){
             if(typeof action === 'function'){
-                const actionObj = action(store.getState);
-                return next(actionObj);
+                return action(dispatch, getState);
             }
             return next(action);
         }
     }
 }
+//const store = createStore(rootReducer, applyMiddleware(logger, asyncMiddleware));
 
 
-//const store = createStore(rootReducer, applyMiddleware(loggerMiddleware, stateMiddleware));
-const store = createStore(rootReducer, applyMiddleware(stateMiddleware));
+const promiseMiddleware = ({dispatch, getState}) => next => async action => {
+    if (action instanceof Promise){
+        const actionObj = await action;
+        return dispatch(actionObj);
+    }
+    return next(action);
+}
+
+const store = createStore(rootReducer, applyMiddleware(logger, asyncMiddleware, promiseMiddleware));
+
+
 export default store;

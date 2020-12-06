@@ -9,9 +9,10 @@ import BugList from './views/BugList';
 import * as bugActionCreators from "./actions";
 
 
-const BugTracker = ({ bugs, toggle, remove, removeClosed, addNew, projects }) => (
+const BugTracker = ({ bugs, toggle, remove, removeClosed, addNew, projects,load }) => (
   <Fragment>
     <h3>Bug Tracker</h3>
+    <input type="button" value="Load" onClick={load} />
     <hr />
     <BugStats bugs={bugs} />
     <BugSort />

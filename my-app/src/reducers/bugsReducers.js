@@ -22,7 +22,9 @@ function bugsReducer(currentState = initialState, action){
             newState = currentState.filter(bug => !bugListToRemove.find(b => b.id === bug.id)); 
         return newState;
     }
-
+    if (action.type === 'BUG_INIT'){
+        return action.payload;
+      }
     return currentState;
 }
 

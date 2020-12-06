@@ -1,16 +1,27 @@
 import BugItem from './BugItem';
+import UserContext from '../../context-demo/UserContext'
 
 const BugList = ({bugs, toggle, remove, removeClosed}) => {
     return (
-        <section className="list">
-            <ol>
-                { bugs.map( bug => (
-                    <BugItem key={bug.id} {...{bug, toggle, remove}}/>
+        <UserContext.Consumer>
+          { userName => (
+            <section className="list">
+              <div>User Name : {userName}</div>
+              <ol>
+                {bugs.map(bug => (
+                  <BugItem key={bug.id} {...{ bug, toggle, remove }} />
                 ))}
-            </ol>
-            <input type="button" value="Remove Closed" onClick={ () => removeClosed(bugs)}/>
-         </section>
-    )
+              </ol>
+              <input
+                type="button"
+                value="Remove Closed"
+                onClick={() => removeClosed(bugs)}
+              />
+            </section>
+          )}
+        </UserContext.Consumer>
+
+    );
 };
 
 export default BugList;

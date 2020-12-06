@@ -2,20 +2,68 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 
 import './index.css';
 import store from './store';
 import BugTracker from './bugTracker';
 import Projects from './projects';
+import Timer from './timer';
+import Home from './home';
+import Login from './login';
+
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <Provider store = {store}>
+//             <Projects projects />
+//             <BugTracker store />
+//         </Provider>
+//     </React.StrictMode>
+// , document.getElementById('root'));
+
+// ReactDOM.render(
+//     <React.StrictMode>
+//       <Provider store={store}>
+//         <Router>
+//           <h1>My App</h1>
+//           <Timer />
+//           <br/>
+//           <div>
+//             <span> [ <Link to="/">Home</Link> ] </span>
+//             <span> [ <Link to="/bugs">Bugs</Link> ] </span>
+//             <span> [ <Link to="/projects">Projects</Link> ] </span>
+//           </div>
+//           <hr/>
+//           <Switch>
+//             <Route path="/bugs">
+//               <BugTracker/>
+//             </Route>
+//             <Route path="/projects">
+//               <Projects/>
+//             </Route>
+//             <Route path="/">
+//               <Home/>
+//             </Route>
+//           </Switch>
+//         </Router>
+//       </Provider>
+//     </React.StrictMode>,
+//     document.getElementById("root")
+//   );
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store = {store}>
-            <Projects projects />
-            <BugTracker store />
-        </Provider>
-    </React.StrictMode>
-, document.getElementById('root'));
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router>
+        <h1>My App</h1>
+        <Timer />
+        <br/>
+        <Login/>
+      </Router>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
 
 // If you want to start measuring performance in your app, pass a function
