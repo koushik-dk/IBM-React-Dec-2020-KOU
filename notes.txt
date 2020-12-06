@@ -45,7 +45,6 @@ HTML & JSX
 
 
 Folder : Assignment-1
-    (KDK create the 01-RIA index.html using react component , refer greeter.html for react)
 
 State
     UI State
@@ -57,3 +56,154 @@ State
         Any data that supports the core application logic
         Highly LIKELY that this data might be needed in other parts of the application
         DO NOT keep this data in the component state. Where?
+
+React Hooks
+    Functions to handle state, life cycle events etc in a functional component
+    Hook function name must start with 'use'
+    Builtin hooks:
+        useState
+        useEffect
+        useReducer
+        useRef
+        useCallback
+        useMemo
+
+create-react-app
+    Node.js module
+
+Node package managers
+    npm
+    yarn
+
+To create a react application using create-react-app
+
+(Download, install & Use it)
+npm install create-react-app -g (OR) yarn add global create-react-app
+create-react-app <app-name>
+
+(OR)
+
+npx create-react-app <app name>
+
+(OR)
+
+yarn create react-app <app name>
+
+JS Module system
+AMD - Asynchronous Module Definition
+CommonJS
+ES6 Modules
+
+ES6 Modules
+    - any entity defined in a JS file is considered private by default
+    - public entities need to explicitly exported
+    - entities from other files have to explicitly imported for usage
+
+App folder structure
+/src
+    /bugTracker
+        /actions
+            - addNew.js
+            - toggle.js
+            -
+            -
+            - index.js
+        /views
+            - bugStats.js
+            - bugEdit.js
+            - 
+            -
+        - index.js
+            (BugTracker component)
+
+    /proejcts
+        /acitons
+        /views
+        - index.js
+
+    /reducers
+        - bugsReducer.js
+        - projectsReducer.js
+
+    /store
+        - index.js
+        
+    - index.js
+
+
+yarn add react-redux
+    connect
+    Provider
+
+Components configured with 'connect' are called as Container / Smart Components
+    - coz, they interface with redux infrastructure to get the data and dispatch
+The other components are called as Dumb / Presentation Components
+    - These receive the data and action dispatchers from the container components and display them
+
+Best Practice : Fewer container components
+
+Redux Middleware
+    - Middleware is a function where the 'cross cutting' concerns are implemented
+
+
+
+There are ONLY 2 places where the complete store state is accessible in the application
+    - mapStateToProps
+        - Use this to access the store state for presentation purpose
+    - action creators (when using the 'state middleware')
+        - Use this to access the store state for 'manipulation' purposes
+
+json-server
+    a node module that can serve the data from a json file as restful services
+    go to the folder that has the data file (db.json in our case)
+    run the following command
+        npx json-server db.json -p 3030
+
+TypeScript = JavaScript + TypeSafety
+
+var x : number = 10;
+
+function add(x : number, y : number) : number {
+    return x + y;
+}
+add('abc', 100); //=> warning will be displayed
+
+    ====> typeScript compile ===>
+
+var x = 10;
+
+function add(x, y) {
+    return x + y;
+}
+
+TS languange constructs
+    - enum
+    - interface
+    - class
+    - access modifiers (public, private, protected)
+    - generics
+    - decorators
+
+Async Operation
+    Initiated but not waited up on for completion
+
+
+A Promise
+    an object designed to hold the result of an async operation
+        and notify the subscribers when the operation is completed
+
+    every subscription (using the 'then' method) returns a 'new promise'
+
+
+Next.js 
+
+SSR
+
+    /Products
+    /Customers
+    /Orders
+    /Users
+
+Custom Hooks
+Context
+Error Boundaries
